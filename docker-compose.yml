@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: 'bhardwaj'
+      POSTGRES_PASSWORD: 'bhardwaj'
+    volumes:
+      - postgres_storage:/var/lib/postgresql
+  pdadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'bhardwaj@gmail.com'
+      PGADMIN_DEFAULT_PASSWORD: 'bhardwaj@1'
+    ports:
+      - '90:80'
+    depends_on:
+      - db
+    volumes:
+      - pgadmin_storage:/var/www/html
+
+volumes:
+    postgres_storage:
+    pgadmin_storage:
+
